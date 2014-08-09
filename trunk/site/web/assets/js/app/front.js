@@ -21,6 +21,13 @@ $(function() {
 
 	/* Public Methods
 	-------------------------------*/
+	/**
+	 * Initial function to set 
+	 * Weather Forecast
+	 *
+	 * @param string
+	 * @return void
+	 */
 	public.setForecast = function(location) {
 		var self = this;
 
@@ -114,7 +121,12 @@ $(function() {
 		};
 
 		var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-		
+			
+		var input        = document.getElementById('location'),
+			autocomplete = new google.maps.places.Autocomplete(input);
+
+		autocomplete.bindTo('bounds', map);
+
 		// add marker
 		var marker = new google.maps.Marker({
 			position  : myLatLng, 
@@ -127,38 +139,72 @@ $(function() {
 		infowindow.open(map, marker);
 
 		// Get Latitude, Longtitude and Address on Drag Marker
-		google.maps.event.addListener(
-			marker,
-			'mouseup',
-			function() {
-				var lat = marker.position.lat();
-				var lng = marker.position.lng();
+		google.maps.event.addListener(marker, 'mouseup', function() {
+			var lat = marker.position.lat();
+			var lng = marker.position.lng();
+			
+			$.get('http://maps.googleapis.com/maps/api/geocode/json', { latlng : lat + ',' + lng, sensor : false }, function(response) {
+				var address  = response.results[0],
+					street 	 = address.address_components[0].long_name,
+					city 	 = address.address_components[2].long_name,
+					state 	 = address.address_components[3].long_name,
+					country  = address.address_components[4].long_name,
+					location = street + ' ' + city + ' ' + state + ' ' + country;
 
-				$('input#lat').val(lat);
-				$('input#lng').val(lng);
+				infowindow.setContent(location);
+				infowindow.open(map, marker);
 
-				
-				$.get('http://maps.googleapis.com/maps/api/geocode/json',
-					{ latlng : lat + ',' + lng, sensor : false }, 
-					function(response) {
-						var address  = response.results[0];
-							street 	 = address.address_components[0].long_name,
-							city 	 = address.address_components[2].long_name,
-							state 	 = address.address_components[3].long_name,
-							country  = address.address_components[4].long_name,
-							location = street+' '+city+' '+state+' '+country;
+				// set input text location
+				// document.getElementById('location').val(location);
+				$('input#location').val(location);
 
-						infowindow.setContent(location);
-						infowindow.open(map, marker);
+				// set forecast
+				self.setForecast(location);
+			});				
+		});
 
-						// set input text location
-						$('input#location').val(location);
+		// Google maps autocomplete form
+		google.maps.event.addListener(autocomplete, 'place_changed', function() {
+			infowindow.close();
+			marker.setVisible(false);
 
-						// set forecast
-						self.setForecast(location);
-				});				
+			var place = autocomplete.getPlace();
+			if (!place.geometry) { return; }
+
+			// if place has a geometry, then present it on map
+			if (place.geometry.viewport) {
+				map.fitBounds(place.geometry.viewport);
+			} else {
+				map.setCenter(place.geometry.location);
+				map.setZoom(17);
 			}
-		);
+
+			// google maps icon
+			marker.setIcon(({
+				url        : place.icon,
+				size       : new google.maps.Size(71, 71),
+				origin     : new google.maps.Point(0, 0),
+				anchor     : new google.maps.Point(17, 34),
+				scaledSize : new google.maps.Size(35, 35)
+			}));
+
+			marker.setPosition(place.geometry.location);
+			marker.setVisible(true);
+
+			var address = '';
+			if (place.address_components) {
+				address = [
+					(place.address_components[0] && place.address_components[0].short_name || ''),
+					(place.address_components[1] && place.address_components[1].short_name || ''),
+					(place.address_components[2] && place.address_components[2].short_name || '')
+				].join(' ');
+			}
+
+			infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+			infowindow.open(map, marker);
+
+			self.setForecast(address);
+		});
 	};
 
 	/**
@@ -243,13 +289,46 @@ $(function() {
 
 		// append to current weather container
 		currentContainer.append(tpl);
-	}
+	};
+
+	/**
+	 * Set current visitor location
+	 * Weather Forecast to template
+	 *
+	 * @param string
+	 * @return void
+	 */
+	public.setDefaultForecast = function() {
+		var self   = this,
+			remote = $('input#remote').val(),
+			url    = 'http://freegeoip.net/json/' + remote;
+
+		// get remote ip address info from
+		// freegeoip.net
+		$.get(url, {}, function(response) {
+
+			var areaCode    = response.area_code,
+				city        = response.city,
+				countryCode = response.country_code,
+				countryName = response.country_name,
+				ip          = response.ip,
+				latitude    = response.latitude,
+				longitude   = response.longitude,
+				regionCode  = response.region_code,
+				regionName  = response.region_name,
+				zipcode     = response.zipcode;
+
+			var location = city + ', ' + regionName + ', ' + countryName;
+
+			$('input#location').val(location);
+
+			self.setForecast(location);
+		});
+	};
 
 	/* Private Methods
 	-------------------------------*/
 	var dateTimeFormat = function(currentTime) {
-		console.log(currentTime);
-
 		var monthNames = new Array(
 			'January', 'February', 'March', 
 			'April', 'May', 'June', 'July', 'August', 'September', 
@@ -278,5 +357,8 @@ $(function() {
 		var location = $('input#location').val();
 		weather.setForecast(location);
 	});
+
+	// set default remote weather forecast
+	weather.setDefaultForecast();
 
 });

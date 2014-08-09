@@ -66,6 +66,7 @@ input[type="text"]:-ms-input-placeholder { color: #999; }
 .result-container .forecast-container .title-text { font-family: 'Montserrat', sans-serif; font-size: 15px; }
 
 .result-container  h5 { font-family: 'Montserrat', sans-serif; font-weight: bold; }
+.result-container  p { margin-bottom: 5px; }
 .result-container  .term { font-weight: bold; margin-right: 10px; }
 .result-container  .term.term-summary { width: 12%; }
 .result-container  .desc.desc-summary { width: 85%; }

@@ -24,6 +24,15 @@ class Front_Page_Index extends Front_Page {
 	/* Public Methods
 	-------------------------------*/
 	public function render() {
+		// get remote address or visitors ip address
+		$remote = $_SERVER['REMOTE_ADDR'];
+
+		// if remote is localhost set remote ip address
+		// to openovate labs office
+		if ($remote == '127.0.0.1') { $remote = '122.54.175.139'; }
+
+		$this->_body = array('remote' => $remote);
+
 		return $this->_page();
 	}
 	

@@ -2,6 +2,7 @@
 	<form action="" method="post" class="weather-form">
 		<h3>Ulat Panahon <i class="fa fa-cloud"></i></h3>
 		<div class="input-group">
+			<input type="hidden" id="remote" value="<?php echo $remote; ?>">
 			<input type="text" id="location" class="form-control" placeholder="Taga saan ka ba? You piece of shit!">
 			<span class="input-group-btn">
 				<button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
@@ -79,4 +80,4 @@
 	</div>
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
