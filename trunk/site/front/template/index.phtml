@@ -1,0 +1,51 @@
+<form action="" method="post" class="weather-form">
+	<h3>Ulat Panahon <i class="fa fa-cloud"></i></h3>
+	<div class="input-group">
+		<input type="text" id="location" class="form-control" placeholder="Taga saan ka ba? You piece of shit!">
+		<span class="input-group-btn">
+			<button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
+		</span>
+	</div>
+</form>
+
+<div class="result-container clearfix">
+	<div class="weather-map pull-left">
+		<p class="title-text"><i class="fa fa-send"></i>&nbsp; Location Map</p>
+
+		<div id="map-canvas">
+			<i class="fa fa-map-marker fa-5x"></i>
+			<p>Mapa ng lokasyon</p>
+		</div>
+	</div>
+
+	<div class="current-weather-container pull-left">
+		<p class="title-text"><i class="fa fa-taxi"></i>&nbsp; Current Weather</p>
+	</div>
+</div>
+
+<script type="text/html" id="current-weather-template">
+	<div class="current-weather-template">
+		<dl class="dl-horizontal">
+			<dt>Location</dt>
+			<dd>[LOCATION]</dd>
+			<dt>Time</dt>
+			<dd>[TIME]</dd>
+			<dt>Summary</dt>
+			<dd>[SUMMARY]</dd>
+			<dt>temperature</dt>
+			<dd>[TEMP]</dd>
+			<dt>Humidity</dt>
+			<dd>[HUMIDITY]</dd>
+			<dt>Cloud Cover</dt>
+			<dd>[CLOUD]</dd>
+			<dt>Wind Speed</dt>
+			<dd>[WIND]</dd>
+			<dt>Latitude</dt>
+			<dd>[LAT]</dd>
+			<dt>Longitude</dt>
+			<dd>[LNG]</dd>
+		</dl>
+	</div>
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>

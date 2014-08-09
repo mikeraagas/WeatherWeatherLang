@@ -1,0 +1,66 @@
+ @font-face {
+    font-family: 'FontAwesome';
+    src: url('../fonts/fontawesome-webfont.eot');
+    src: url('../fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff') format('woff'), url('../fonts/fontawesome-webfont.ttf') format('truetype'), url('../fonts/fontawesome-webfont.svg#fontawesomeregular') format('svg');
+ }
+
+html, body {
+	background: url('../images/groovepaper/groovepaper.png');
+	color: #555;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 13px;
+	margin: 0px;
+	padding: 0px;
+}
+body { margin-bottom: 50px; }
+
+input[type="text"]::-webkit-input-placeholder { color: #999; }
+input[type="text"]:-moz-placeholder { color: #999; } /* Firefox 18- */
+input[type="text"]::-moz-placeholder { color: #999; } /* Firefox 19+ */
+input[type="text"]:-ms-input-placeholder { color: #999; }
+
+/* ------------- HEADER ------------- */
+.head { background: #4b4b4b; color: #fff; height: 50px; }
+.header-container { margin: 0 auto; width: 1200px; padding-top: 15px; }
+.header-container h1 {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 18px;
+	font-weight: normal;
+	margin: 0;
+}
+
+/* ------------- BODY ------------- */
+.body { margin: 0 auto; padding-top: 20px; width: 1200px; }
+.body .weather-form h3 {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 40px;
+	font-weight: bold;
+	margin-bottom: 30px;
+	text-align: center;
+	text-transform: uppercase;
+}
+.body .weather-form input[type="text"] { border-radius: 0; height: 50px; font-size: 14px; position: relative; }
+.body .weather-form input[type="text"]:before {
+	font-family: FontAwesome;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    content: '&#xf002';
+}
+.body .weather-form button { border-radius: 0; height: 50px; width: 60px; }
+
+
+.result-container { margin-top: 20px; }
+.result-container .weather-map { margin-right: 10px; width: 588px; }
+.result-container .weather-map #map-canvas {
+	border: 1px solid #ddd;
+	height: 350px;
+	text-align: center;
+	vertical-align: middle;
+	width: 100%;
+}
+.result-container .weather-map #map-canvas i { margin: 80px 0 20px; }
+.result-container .weather-map .title-text { font-family: 'Montserrat', sans-serif; font-size: 15px; }
+
+.result-container .current-weather-container { margin-left: 10px; width: 580px; }
+.result-container .current-weather-container .title-text { font-family: 'Montserrat', sans-serif; font-size: 15px; }
