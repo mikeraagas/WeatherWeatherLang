@@ -1,30 +1,33 @@
-<form action="" method="post" class="weather-form">
-	<h3>Ulat Panahon <i class="fa fa-cloud"></i></h3>
-	<div class="input-group">
-		<input type="text" id="location" class="form-control" placeholder="Taga saan ka ba? You piece of shit!">
-		<span class="input-group-btn">
-			<button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
-		</span>
-	</div>
-</form>
-
-<div class="result-container clearfix">
-	<div class="weather-map pull-left">
-		<p class="title-text"><i class="fa fa-send"></i>&nbsp; Location Map</p>
-
-		<div id="map-canvas">
-			<i class="fa fa-map-marker fa-5x"></i>
-			<p>Mapa ng lokasyon</p>
+<div class="home-container">
+	<form action="" method="post" class="weather-form">
+		<h3>Ulat Panahon <i class="fa fa-cloud"></i></h3>
+		<div class="input-group">
+			<input type="text" id="location" class="form-control" placeholder="Taga saan ka ba? You piece of shit!">
+			<span class="input-group-btn">
+				<button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
+			</span>
 		</div>
-	</div>
+	</form>
 
-	<div class="current-weather-container pull-left">
-		<p class="title-text"><i class="fa fa-taxi"></i>&nbsp; Current Weather</p>
-	</div>
+	<div class="result-container clearfix">
+		<div class="weather-map pull-left">
+			<p class="title-text"><i class="fa fa-send"></i>&nbsp; Location Map</p>
+
+			<div id="map-canvas">
+				<i class="fa fa-map-marker fa-5x"></i>
+				<p>Mapa ng lokasyon</p>
+			</div>
+		</div>
+
+		<div class="forecast-container pull-left">
+			<p class="title-text"><i class="fa fa-taxi"></i>&nbsp; Current Weather Forecast</p>
+		</div>
+	</div>	
 </div>
 
-<script type="text/html" id="current-weather-template">
-	<div class="current-weather-template">
+<script type="text/html" id="forecast-template">
+	<div class="forecast-template">
+		<hr>
 		<dl class="dl-horizontal">
 			<dt>Location</dt>
 			<dd>[LOCATION]</dd>
@@ -35,16 +38,44 @@
 			<dt>temperature</dt>
 			<dd>[TEMP]</dd>
 			<dt>Humidity</dt>
-			<dd>[HUMIDITY]</dd>
+			<dd>[HUMIDITY] %</dd>
 			<dt>Cloud Cover</dt>
 			<dd>[CLOUD]</dd>
-			<dt>Wind Speed</dt>
-			<dd>[WIND]</dd>
+			<dt>Wind</dt>
+			<dd>[WIND] mph</dd>
 			<dt>Latitude</dt>
 			<dd>[LAT]</dd>
 			<dt>Longitude</dt>
 			<dd>[LNG]</dd>
 		</dl>
+
+		<hr>
+		<div class="hourly-forecast">
+			<h5>Hourly</h5>
+			<div class="next-hour clearfix">
+				<p class="term pull-left">Next Hour: </p>
+				<p class="desc pull-left">[NEXT HOUR]</p>
+			</div>
+
+			<div class="hourly-summary clearfix">
+				<p class="term term-summary pull-left">Summary: </p>
+				<p class="desc desc-summary pull-left">[HOURLY]</p>
+			</div>
+		</div>
+
+		<hr>
+		<div class="daily-forecast">
+			<h5>Daily</h5>
+			<div class="next-day clearfix">
+				<p class="term pull-left">Next 24 Hour: </p>
+				<p class="desc pull-left">[NEXT DAY]</p>
+			</div>
+
+			<div class="daily-summary clearfix">
+				<p class="term term-summary pull-left">Summary: </p>
+				<p class="desc desc-summary  pull-left">[DAILY]</p>
+			</div>
+		</div>
 	</div>
 </script>
 

@@ -54,13 +54,18 @@ input[type="text"]:-ms-input-placeholder { color: #999; }
 .result-container .weather-map { margin-right: 10px; width: 588px; }
 .result-container .weather-map #map-canvas {
 	border: 1px solid #ddd;
-	height: 350px;
+	height: 450px;
 	text-align: center;
 	vertical-align: middle;
 	width: 100%;
 }
-.result-container .weather-map #map-canvas i { margin: 80px 0 20px; }
+.result-container .weather-map #map-canvas i { margin: 150px 0 20px; }
 .result-container .weather-map .title-text { font-family: 'Montserrat', sans-serif; font-size: 15px; }
 
-.result-container .current-weather-container { margin-left: 10px; width: 580px; }
-.result-container .current-weather-container .title-text { font-family: 'Montserrat', sans-serif; font-size: 15px; }
+.result-container .forecast-container { margin-left: 10px; width: 580px; }
+.result-container .forecast-container .title-text { font-family: 'Montserrat', sans-serif; font-size: 15px; }
+
+.result-container  h5 { font-family: 'Montserrat', sans-serif; font-weight: bold; }
+.result-container  .term { font-weight: bold; margin-right: 10px; }
+.result-container  .term.term-summary { width: 12%; }
+.result-container  .desc.desc-summary { width: 85%; }

@@ -46,13 +46,11 @@ $(function() {
 
 			// set weather forecast
 			self.getWeather(coordinates, function(response) {
-				var currentWeather = response.currently,
-					dailyWeather   = response.daily,
-					hourlyWeather  = response.hourly,
-					timezone       = response.timezone;
+				var weather = response;
 
 				// current weather template
-				self.setCurrentWeather(location, coordinates, currentWeather);
+				self.setWeatherInfo(location, coordinates, response);
+
 				console.log(response);
 			});
 		});
@@ -191,37 +189,57 @@ $(function() {
 	 * @param string
 	 * @return void
 	 */
-	public.setCurrentWeather = function(location, coordinates, currentWeather) {
+	public.setWeatherInfo = function(location, coordinates, weather) {
+		var currentWeather = weather.currently,
+			dailyWeather   = weather.daily,
+			hourlyWeather  = weather.hourly,
+			timezone       = weather.timezone,
+			offset         = weather.offset;
+
+		// get current and next hour weather based on offset
+		var currentHour = hourlyWeather.data[offset],
+			nextHour    = hourlyWeather.data[offset + 1],
+			nextDay     = dailyWeather.data[2];
+
+		// hourly and daily summary
+		var hourly = hourlyWeather.summary,
+			daily  = dailyWeather.summary;
+
 		// current weather forecast template
-		var currentTemplate  = $('#current-weather-template').html(),
-			currentContainer = $('.current-weather-container');
+		var currentTemplate  = $('#forecast-template').html(),
+			currentContainer = $('.forecast-container');
 
 		// get current weather forecast information
-		var currentTime       = currentWeather['time'],
-			currentSummary    = currentWeather.summary,
-			currentTemp       = currentWeather.temperature,
-			currentHumidity   = currentWeather.humidity,
-			currentCloud      = currentWeather.cloudCover,
-			currentVisibility = currentWeather.visibility,
-			currentWind       = currentWeather.windSpeed;
-
+		var currentHourTime       = currentHour['time'],
+			currentHourSummary    = currentHour.summary,
+			currentHourTemp       = currentHour.temperature,
+			currentHourHumidity   = currentHour.humidity,
+			currentHourCloud      = currentHour.cloudCover,
+			currentHourVisibility = currentHour.visibility,
+			currentHourWind       = currentHour.windSpeed;
+			nextHourSummary       = nextHour.summary,
+			nextDaySummary        = nextDay.summary;
 
 		// format date and time
 		// var dateTime = dateTimeFormat(currentTime); 
 
 		// replace values from current weather template
 		var tpl = currentTemplate.replace('[LOCATION]', location),
-			tpl = tpl.replace('[TIME]', currentTime),
-			tpl = tpl.replace('[SUMMARY]', currentSummary),
-			tpl = tpl.replace('[TEMP]', currentTemp),
-			tpl = tpl.replace('[HUMIDITY]', currentHumidity),
-			tpl = tpl.replace('[CLOUD]', currentCloud),
-			tpl = tpl.replace('[WIND]', currentWind);
-			tpl = tpl.replace('[LAT]', coordinates.lat);
-			tpl = tpl.replace('[LNG]', coordinates.lng);
+			tpl = tpl.replace('[TIME]', currentHourTime),
+			tpl = tpl.replace('[SUMMARY]', currentHourSummary),
+			tpl = tpl.replace('[TEMP]', currentHourTemp),
+			tpl = tpl.replace('[HUMIDITY]', currentHourHumidity),
+			tpl = tpl.replace('[CLOUD]', currentHourCloud),
+			tpl = tpl.replace('[WIND]', currentHourWind);
+			tpl = tpl.replace('[LAT]', coordinates.lat),
+			tpl = tpl.replace('[LNG]', coordinates.lng),
+			tpl = tpl.replace('[NEXT HOUR]', nextHourSummary),
+			tpl = tpl.replace('[NEXT DAY]', nextDaySummary),
+			tpl = tpl.replace('[HOURLY]', hourly),
+			tpl = tpl.replace('[DAILY]', daily);
 
 		// remove template if exist
-		currentContainer.find('.current-weather-template').remove();
+		currentContainer.find('.forecast-template').remove();
 
 		// append to current weather container
 		currentContainer.append(tpl);
