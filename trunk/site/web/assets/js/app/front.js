@@ -260,23 +260,44 @@ $(function() {
 			currentHourSummary    = currentHour.summary,
 			currentHourTemp       = currentHour.temperature,
 			currentHourHumidity   = currentHour.humidity,
+			currentHourIcon		  = currentHour.icon,
 			currentHourCloud      = currentHour.cloudCover,
 			currentHourVisibility = currentHour.visibility,
 			currentHourWind       = currentHour.windSpeed;
 			nextHourSummary       = nextHour.summary,
 			nextDaySummary        = nextDay.summary;
 
+		// for skycons
+		var skycons = new Skycons({"color": "white"});
+
+		var weatherIcon = currentHourIcon;
+		switch (weatherIcon) {
+			//default : skycons.add("skycons", Skycons.CLEAR_DAY); break;
+			case 'clear_day' : skycons.add("skycons", Skycons.CLEAR_DAY); break;
+			case 'clear_night' : skycons.add("skycons", Skycons.CLEAR_NIGHT); break;
+			case 'partly-cloudy-day' : skycons.add("skycons", Skycons.PARTLY_CLOUDY_DAY); break;
+			case 'partly-cloudy-night' : skycons.add("skycons", Skycons.PARTLY_CLOUDY_NIGHT); break;
+			case 'cloudy' : skycons.add("skycons", Skycons.CLOUDY); break;
+			case 'rain' : skycons.add("skycons", Skycons.RAIN); break;
+			case 'sleet' : skycons.add("skycons", Skycons.SLEET); break;
+			case 'snow' : skycons.add("skycons", Skycons.SNOW); break;
+			case 'wind' : skycons.add("skycons", Skycons.WIND); break;
+			case 'fog' : skycons.add("skycons", Skycons.FOG); break;
+		};
+
+		skycons.play();
+
 		// format date and time
 		// var dateTime = dateTimeFormat(currentTime); 
 
 		// replace values from current weather template
 		var tpl = currentTemplate.replace('[LOCATION]', location),
-			tpl = tpl.replace('[TIME]', currentHourTime),
 			tpl = tpl.replace('[SUMMARY]', currentHourSummary),
 			tpl = tpl.replace('[TEMP]', currentHourTemp),
 			tpl = tpl.replace('[HUMIDITY]', currentHourHumidity),
 			tpl = tpl.replace('[CLOUD]', currentHourCloud),
-			tpl = tpl.replace('[WIND]', currentHourWind);
+			tpl = tpl.replace('[WIND]', currentHourWind),
+			tpl = tpl.replace('[TIME]', currentHourTime),
 			tpl = tpl.replace('[LAT]', coordinates.lat),
 			tpl = tpl.replace('[LNG]', coordinates.lng),
 			tpl = tpl.replace('[NEXT HOUR]', nextHourSummary),

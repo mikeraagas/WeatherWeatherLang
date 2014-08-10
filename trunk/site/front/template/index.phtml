@@ -12,7 +12,7 @@
 
 	<div class="result-container clearfix">
 		<div class="weather-map pull-left">
-			<p class="title-text"><i class="fa fa-send"></i>&nbsp; Location Map</p>
+			<p class="title-text"><i class="fa fa-map-marker"></i>&nbsp; Location Map</p>
 
 			<div id="map-canvas">
 				<i class="fa fa-map-marker fa-5x"></i>
@@ -21,7 +21,8 @@
 		</div>
 
 		<div class="forecast-container pull-left">
-			<p class="title-text"><i class="fa fa-taxi"></i>&nbsp; Current Weather Forecast</p>
+			<p class="title-text"><i class="fa fa-globe"></i>&nbsp; Current Weather Forecast</p>
+			<canvas id="skycons" width="128" height="128ge a"></canvas>
 		</div>
 	</div>	
 </div>
@@ -30,29 +31,30 @@
 	<div class="forecast-template">
 		<hr>
 		<dl class="dl-horizontal">
-			<dt>Location</dt>
+			<dt>Location:</dt>
 			<dd>[LOCATION]</dd>
-			<dt>Time</dt>
-			<dd>[TIME]</dd>
-			<dt>Summary</dt>
+			<dt>Summary:</dt>
 			<dd>[SUMMARY]</dd>
-			<dt>temperature</dt>
+			<dt>Temperature:</dt>
 			<dd>[TEMP]</dd>
-			<dt>Humidity</dt>
+			<dt>Humidity:</dt>
 			<dd>[HUMIDITY] %</dd>
-			<dt>Cloud Cover</dt>
+			<dt>Cloud Cover:</dt>
 			<dd>[CLOUD]</dd>
-			<dt>Wind</dt>
+			<dt>Wind:</dt>
 			<dd>[WIND] mph</dd>
-			<dt>Latitude</dt>
+			<dt>Time:</dt>
+			<dd>[TIME]</dd>
+			<dt>Latitude:</dt>
 			<dd>[LAT]</dd>
-			<dt>Longitude</dt>
+			<dt>Longitude:</dt>
 			<dd>[LNG]</dd>
 		</dl>
 
+		
 		<hr>
 		<div class="hourly-forecast">
-			<h5>Hourly</h5>
+			<h5><i class="fa fa-compass"></i>&nbsp; Hourly</h5>
 			<div class="next-hour clearfix">
 				<p class="term pull-left">Next Hour: </p>
 				<p class="desc pull-left">[NEXT HOUR]</p>
@@ -60,13 +62,13 @@
 
 			<div class="hourly-summary clearfix">
 				<p class="term term-summary pull-left">Summary: </p>
-				<p class="desc desc-summary pull-left">[HOURLY]</p>
+				<p class="desc desc-summary pull-left">&nbsp; [HOURLY]</p>
 			</div>
 		</div>
 
 		<hr>
 		<div class="daily-forecast">
-			<h5>Daily</h5>
+			<h5><i class="fa fa-tachometer"></i>&nbsp; Daily</h5>
 			<div class="next-day clearfix">
 				<p class="term pull-left">Next 24 Hour: </p>
 				<p class="desc pull-left">[NEXT DAY]</p>
@@ -74,10 +76,11 @@
 
 			<div class="daily-summary clearfix">
 				<p class="term term-summary pull-left">Summary: </p>
-				<p class="desc desc-summary  pull-left">[DAILY]</p>
+				<p class="desc desc-summary  pull-left">&nbsp; [DAILY]</p>
 			</div>
 		</div>
 	</div>
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+<script src="/assets/js/lib/skycons.js"></script>
