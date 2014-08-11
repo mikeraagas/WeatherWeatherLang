@@ -263,12 +263,13 @@ $(function() {
 			currentHourIcon		  = currentHour.icon,
 			currentHourCloud      = currentHour.cloudCover,
 			currentHourVisibility = currentHour.visibility,
-			currentHourWind       = currentHour.windSpeed;
+			currentHourWind       = currentHour.windSpeed,
+			currentHourPressure	  = currentHour.pressure,
 			nextHourSummary       = nextHour.summary,
 			nextDaySummary        = nextDay.summary;
 
 		// for skycons
-		var skycons = new Skycons({"color": "#555"});
+		var skycons = new Skycons({"color": "#fff"});
 
 		var weatherIcon = currentHourIcon;
 		switch (weatherIcon) {
@@ -297,6 +298,7 @@ $(function() {
 			tpl = tpl.replace('[HUMIDITY]', currentHourHumidity),
 			tpl = tpl.replace('[CLOUD]', currentHourCloud),
 			tpl = tpl.replace('[WIND]', currentHourWind),
+			tpl = tpl.replace('[PRESSURE]', currentHourPressure),
 			tpl = tpl.replace('[TIME]', currentHourTime),
 			tpl = tpl.replace('[LAT]', coordinates.lat),
 			tpl = tpl.replace('[LNG]', coordinates.lng),

@@ -32,14 +32,26 @@ input[type="text"]::-moz-placeholder { color: #999; } /* Firefox 19+ */
 input[type="text"]:-ms-input-placeholder { color: #999; }
 
 /* ------------- HEADER ------------- */
-.head { background: #4b4b4b; color: #fff; height: 50px; }
-.header-container { margin: 0 auto; width: 1200px; padding-top: 15px; }
-.header-container h1 {
+.head { background: #4b4b4b; color: #fff; }
+.header-container { margin: 0 auto; width: 1200px; }
+/*.header-container h1 {
 	font-family: 'Montserrat', sans-serif;
 	font-size: 18px;
 	font-weight: normal;
 	margin: 0;
-}
+}*/
+
+
+.head .navbar { border-radius: 0; }
+.head .navbar h1 { margin: 0; padding-top: 10px; }
+.head .navbar h1 a i { color: #ffffff; }
+.head .navbar .container-fluid { padding-right: 0; padding-left: 0; }
+.head .navbar-default { background-color: #3c464e; border: 0; border-color: transparent; height: 63px; }
+.head .navbar-default .navbar-nav > li > a { color: #ffffff; font-size: 15px; font-weight: bold; padding: 20px; }
+.head .navbar-default .navbar-nav li > a:hover { border-bottom: 3px solid #ffffff; }
+.head .navbar-default .navbar-nav > .active > a { background-color: transparent; color: #ffffff; font-size: 15px;  } 
+.head .navbar-default .navbar-nav > .active > a:hover, 
+.head .navbar-default .navbar-nav > .active > a:focus { background-color: transparent; font-size: 15px; }
 
 /* ------------- BODY ------------- */
 .body { margin: 0 auto; padding-top: 20px; width: 1200px; }
@@ -49,7 +61,7 @@ input[type="text"]:-ms-input-placeholder { color: #999; }
 	font-weight: bold;
 	margin-bottom: 30px;
 	text-align: center;
-	text-transform: uppercase;
+	color: #3c464e;
 }
 .body .weather-form input[type="text"] { border-radius: 0; height: 50px; font-size: 14px; position: relative; }
 .body .weather-form input[type="text"]:before {
@@ -63,6 +75,7 @@ input[type="text"]:-ms-input-placeholder { color: #999; }
 
 
 .result-container { margin-top: 20px; }
+/*.result-container i { color: #e11d1d; }*/
 .result-container .weather-map { margin-right: 10px; width: 588px; }
 .result-container .weather-map #map-canvas {
 	border: 1px solid #ddd;
@@ -72,26 +85,202 @@ input[type="text"]:-ms-input-placeholder { color: #999; }
 	width: 100%;
 }
 .result-container .weather-map #map-canvas i { margin: 150px 0 20px; }
-.result-container .weather-map .title-text { font-family: 'Montserrat', sans-serif; font-size: 18px; }
+.result-container .weather-map .title-text { font-family: 'Montserrat', sans-serif; font-size: 20px; }
 
 .result-container .forecast-container { margin-left: 10px; position: relative; width: 580px; }
-.result-container .forecast-container .title-text { font-family: 'Montserrat', sans-serif; font-size: 18px; }
+.result-container .forecast-container .title-text { font-family: 'Montserrat', sans-serif; font-size: 20px; }
 .result-container .forecast-container #skycons { 
-	border-radius: 10px; 
-	left: 60%; 
+/*	background-color: #6bc2ea; 
+	border-radius: 10px; */
+	left: 50%; 
 	position: absolute; 
-	top: 21%; 
+	top: 13%; 
 }
 
-.result-container .forecast-container .forecast-template dt { font-size: 14px; font-family: 'Montserrat'; }
-.result-container .forecast-container .forecast-template dd,
+.result-container .forecast-container .forecast-template dt { font-size: 15px; font-family: 'Montserrat'; line-height: 21px; }
+.result-container .forecast-container .forecast-template dd/*,
 .result-container .forecast-container .hourly-forecast p,
-.result-container .forecast-container .daily-forecast p { font-size: 13px; }
+.result-container .forecast-container .daily-forecast p */{ font-family: 'dosislight';  font-size: 16px;  font-weight: bold; }
 .result-container .forecast-container .hourly-forecast h5,
-.result-container .forecast-container .daily-forecast h5 {font-size: 18px; }
+.result-container .forecast-container .daily-forecast h5 { font-size: 20px; }
 
 .result-container  h5 { font-family: 'Montserrat', sans-serif; }
 .result-container  p { margin-bottom: 5px; }
-.result-container  .term { font-weight: bold; margin-right: 10px; }
+/*.result-container  .term { font-weight: bold; margin-right: 10px; }
 .result-container  .term.term-summary { width: 12%; }
-.result-container  .desc.desc-summary { width: 85%; }
+.result-container  .desc.desc-summary { width: 85%; }*/
+
+
+.info {
+list-style: none;
+margin-left: 50px;
+color: #FFF;
+font-family: 'dosislight';
+}
+/*.info ul {
+float: left;
+}
+
+.info ul li {
+float: left;
+}*/
+
+/*.info .info-tab .info-meta li {
+float: left;
+}
+*/
+
+.info .info-meta li.first {
+width: 310px;
+height: 340px;
+padding: 30px 25px 30px 25px;
+background-color: #3c464e;
+}
+
+.info .info-meta li.first .daydatetime {
+	color: #FFF;
+	display: block;
+	padding-left: 45px;
+	text-shadow: 1px 1px 0px #474747;
+}
+
+.info .info-meta li.first .temperature {
+overflow: hidden;
+height: 85px;
+}
+
+.fl {
+float: left;
+height: 85px;
+}
+
+.sign-wrapper {
+height: 100px;
+text-align: center;
+display: table-cell;
+vertical-align: middle;
+}
+
+.fr {
+padding-left: 45px;
+height: 85px;
+}
+
+.info .info-meta li.first .temperature .gradus {
+height: 100px;
+color: #FFF;
+text-shadow: 1px 1px 0px #474747;
+overflow: hidden;
+display: table-cell;
+vertical-align: middle;
+}
+
+.info .info-meta li.first .temperature .gradus .celsius {
+float: right;
+font-size: 30px;
+}
+
+.info .info-meta li.first .temperature .gradus .number {
+float: right;
+font-size: 76px;
+font-weight: bold;
+}
+
+.info .info-meta li.first .discription {
+color: #FFF;
+text-shadow: 1px 1px 0px #474747;
+margin: 15px 0;
+font-size: 18px;
+line-height: 18px;
+}
+
+.info .info-meta li.first .windchill {
+color: #FFF;
+text-shadow: 1px 1px 0px #474747;
+font-size: 14px;
+}
+
+.info .info-meta li.first .windchill {
+color: #FFF;
+text-shadow: 1px 1px 0px #474747;
+font-size: 15px;
+font-weight: bold;
+}
+
+.info .info-meta li.first .other {
+color: #FFF;
+text-shadow: 1px 1px 0px #474747;
+font-size: 18px;
+margin-top: 15px;
+overflow: hidden;
+line-height: 24px;
+font-weight: normal;
+}
+
+.info .info-meta li.first .other .humidity {
+overflow: hidden;
+display: block;
+width: 100px;
+float: left;
+font-weight: bold;
+}
+
+.info .info-meta li.first .other .humidity .icon {
+margin-top: -3px;
+display: block;
+float: left;
+}
+
+.info .info-meta li.first .other .humidity .point, #weather .info .info .info-meta li.first .other .wind .point {
+font-size: 20px;
+line-height: 28px;
+font-weight: bold;
+}
+
+.info .info-meta li.first .other .cloud {
+overflow: hidden;
+display: block;
+width: 101px;
+float: right;
+font-weight: bold;
+}
+
+.info .info-meta li.first .other .cloud {
+
+font-weight: bold;
+}
+
+.info .info-meta li.first .other .wind {
+overflow: hidden;
+display: block;
+float: left;
+width: 130px;
+margin-top: 10px;
+}
+
+.info .info-meta li.first .other .wind .icon {
+margin-right: 5px;
+display: block;
+float: left;
+}
+
+
+.info .info-meta li.first .other .wind .point {
+font-size: 18px;
+line-height: 28px;
+font-weight: bold;
+}
+
+.info .info-meta li.first .other .rainpos {
+overflow: hidden;
+display: block;
+float: right;
+width: 103px;
+margin-top: 10px;
+}
+
+.info .info-meta li.first .other .rainpos .point {
+font-size: 18px;
+line-height: 28px;
+font-weight: bold;
+}
