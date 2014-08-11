@@ -44,7 +44,7 @@ $(function() {
 			};
 
 			if (status == 'error') {
-				alert('Invalid Address');
+				alert('Invalid Location');
 				return false;
 			}
 
@@ -268,7 +268,7 @@ $(function() {
 			nextDaySummary        = nextDay.summary;
 
 		// for skycons
-		var skycons = new Skycons({"color": "white"});
+		var skycons = new Skycons({"color": "#555"});
 
 		var weatherIcon = currentHourIcon;
 		switch (weatherIcon) {
@@ -312,40 +312,30 @@ $(function() {
 		currentContainer.append(tpl);
 	};
 
-	/**
-	 * Set current visitor location
-	 * Weather Forecast to template
-	 *
-	 * @param string
-	 * @return void
-	 */
-	public.setDefaultForecast = function() {
-		var self   = this,
-			remote = $('input#remote').val(),
-			url    = 'http://freegeoip.net/json/' + remote;
+	public.setDefaultForecast = function(lat, lng) {
+		var self = this;
 
-		// get remote ip address info from
-		// freegeoip.net
-		$.get(url, {}, function(response) {
+		$.get('http://maps.googleapis.com/maps/api/geocode/json', { latlng : lat + ',' + lng, sensor : false }, function(response) {
+			// console.log(self);
+			var address  = response.results[0],
+				street 	 = address.address_components[0].long_name,
+				city 	 = address.address_components[2].long_name,
+				state 	 = address.address_components[3].long_name,
+				country  = address.address_components[4].long_name,
+				location = street + ' ' + city + ' ' + state + ' ' + country;
 
-			var areaCode    = response.area_code,
-				city        = response.city,
-				countryCode = response.country_code,
-				countryName = response.country_name,
-				ip          = response.ip,
-				latitude    = response.latitude,
-				longitude   = response.longitude,
-				regionCode  = response.region_code,
-				regionName  = response.region_name,
-				zipcode     = response.zipcode;
-
-			var location = city + ', ' + regionName + ', ' + countryName;
-
+			// set input text location
+			// document.getElementById('location').val(location);
 			$('input#location').val(location);
 
+			// set forecast
 			self.setForecast(location);
 		});
-	};
+	}
+
+	/* Adaptor
+	-------------------------------*/
+	var weather = c.load();
 
 	/* Private Methods
 	-------------------------------*/
@@ -366,9 +356,20 @@ $(function() {
 		return formattedDate;
 	};
 
-	/* Adaptor
-	-------------------------------*/
-	var weather = c.load();
+	var geolocationFound = function(position) {
+		var coordinates = position.coords,
+			lat         = coordinates.latitude,
+			lng         = coordinates.longitude;
+
+		weather.setDefaultForecast(lat, lng);
+	};
+
+	var geolocationNotFound = function() {
+		var lat = '14.584027',
+			lng = '121.056992';
+
+		weather.setDefaultForecast(lat, lng);
+	};
 
 	/* Events
 	-------------------------------*/
@@ -380,6 +381,9 @@ $(function() {
 	});
 
 	// set default remote weather forecast
-	weather.setDefaultForecast();
-
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(geolocationFound, geolocationNotFound);
+	} else {
+		geolocationNotFound();
+	}
 });

@@ -25,6 +25,8 @@ abstract class Front_Page extends Eden_Class {
 	protected $_title 		= NULL;
 	protected $_class 		= NULL;
 	protected $_template 	= NULL;
+	protected $_db          = NULL;
+	protected $_registry    = NULL;
 	
 	/* Private Properties
 	-------------------------------*/
@@ -32,6 +34,10 @@ abstract class Front_Page extends Eden_Class {
 	-------------------------------*/
 	/* Magic
 	-------------------------------*/
+	public function __construct() {
+		$this->_db = front()->getDatabase();
+	}
+
 	public function __toString() {
 		try {
 			$output = $this->render();

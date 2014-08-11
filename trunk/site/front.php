@@ -76,7 +76,7 @@ class Front extends Eden {
 	 */
 	public function setDatabases() {
 		$databases 	= $this->config('databases');
-		
+
 		foreach($databases as $key => $info) {	
 			//connect to the data as described in the config
 			switch($info['type']) {
@@ -173,7 +173,7 @@ class Front extends Eden {
 		$this->registry()
 			->set('path', 'root', 		$this->_root)
 			->set('path', 'module', 	$this->_root.'/module')
-			->set('path', 'config', 	$this->_root.'/config')
+			->set('path', 'config', 	$this->_root.'/../../config')
 			->set('path', 'theme', 		$this->_root.'/theme')
 			->set('path', 'page', 		$this->_root.'/front/page')
 			->set('path', 'template',   $this->_root.'/front/template')
@@ -375,6 +375,19 @@ class Front extends Eden {
 			->set('line', $line)
 			->set('message', $message)
 			->parsePhp(dirname(__FILE__).'/front/error.phtml');
+	}
+
+	/**
+	 * Get Database
+	 *
+	 * @return object
+	 */
+	public function getDatabase($key = NULL) {
+		if(is_null($key)) {
+			return $this->_database;
+		}
+
+		return $this->_registry->get('database', $key);
 	}
 	
 	/* Protected Methods
