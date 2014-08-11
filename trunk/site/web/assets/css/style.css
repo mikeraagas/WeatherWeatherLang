@@ -79,7 +79,7 @@ input[type="text"]:-ms-input-placeholder { color: #999; }
 .result-container .weather-map { margin-right: 10px; width: 588px; }
 .result-container .weather-map #map-canvas {
 	border: 1px solid #ddd;
-	height: 450px;
+	height: 600px;
 	text-align: center;
 	vertical-align: middle;
 	width: 100%;
@@ -106,9 +106,9 @@ input[type="text"]:-ms-input-placeholder { color: #999; }
 
 .result-container  h5 { font-family: 'Montserrat', sans-serif; }
 .result-container  p { margin-bottom: 5px; }
-/*.result-container  .term { font-weight: bold; margin-right: 10px; }
+.result-container  .term { font-weight: bold; margin-right: 10px; }
 .result-container  .term.term-summary { width: 12%; }
-.result-container  .desc.desc-summary { width: 85%; }*/
+.result-container  .desc.desc-summary { width: 85%; }
 
 
 .info {

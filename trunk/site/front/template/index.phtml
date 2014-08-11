@@ -3,7 +3,7 @@
 		<h3>Dahil ang buhay ay Weather Weather lamang</h3>
 		<div class="input-group">
 			<input type="hidden" id="remote" value="<?php echo $remote; ?>">
-			<input type="text" id="location" class="form-control" placeholder="Taga saan ka ba? You piece of shit!">
+			<input type="text" id="location" class="form-control" placeholder="Input Location">
 			<span class="input-group-btn">
 				<button type="submit" class="btn btn-info"><i class="fa fa-search"></i></button>
 			</span>
@@ -40,7 +40,7 @@
 							<div class="temperature">
 								<div class="fr">
 									<div class="gradus">
-										<span class="celsius">° C</span>
+										<span class="celsius">° F</span>
 										<span class="number">[TEMP]</span>
 									</div>
 								</div>
@@ -76,23 +76,29 @@
 		<hr>
 		<div class="hourly-forecast">
 			<h5><i class="fa fa-compass"></i>&nbsp; Hourly</h5>
-			<dl class="dl-horizontal">
-				<dt>Next Hour:</dt>
-				<dd>[NEXT HOUR]</dd>			
-				<dt>Summary: </dt>
-				<dd>[HOURLY]</dd>
-			</dl>
+			<div class="next-hour clearfix">
+				<p class="term pull-left">Next Hour: </p>
+				<p class="desc pull-left">[NEXT HOUR]</p>
+			</div>
+
+			<div class="hourly-summary clearfix">
+				<p class="term term-summary pull-left">Summary: </p>
+				<p class="desc desc-summary pull-left">&nbsp; [HOURLY]</p>
+			</div>
 		</div>
 
 		<hr>
 		<div class="daily-forecast">
 			<h5><i class="fa fa-tachometer"></i>&nbsp; Daily</h5>
-			<dl class="dl-horizontal">
-				<dt>Next 24 Hours:</dt>
-				<dd>[NEXT DAY]</dd>
-				<dt>Summary: </dt>
-				<dd>[DAILY]</dd>
-			</dl>
+			<div class="next-day clearfix">
+				<p class="term pull-left">Next 24 Hour: </p>
+				<p class="desc pull-left">[NEXT DAY]</p>
+			</div>
+
+			<div class="daily-summary clearfix">
+				<p class="term term-summary pull-left">Summary: </p>
+				<p class="desc desc-summary  pull-left">&nbsp; [DAILY]</p>
+			</div>
 		</div>
 	</div>
 </script>
