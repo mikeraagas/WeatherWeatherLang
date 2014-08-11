@@ -1,11 +1,11 @@
 <div class="home-container">
 	<form action="" method="post" class="weather-form">
-		<h3>Ulat Panahon <i class="fa fa-cloud"></i></h3>
+		<h3>Dahil ang buhay ay Weather Weather lamang</h3>
 		<div class="input-group">
 			<input type="hidden" id="remote" value="<?php echo $remote; ?>">
 			<input type="text" id="location" class="form-control" placeholder="Taga saan ka ba? You piece of shit!">
 			<span class="input-group-btn">
-				<button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
+				<button type="submit" class="btn btn-info"><i class="fa fa-search"></i></button>
 			</span>
 		</div>
 	</form>
@@ -22,7 +22,7 @@
 
 		<div class="forecast-container pull-left">
 			<p class="title-text"><i class="fa fa-globe"></i>&nbsp; Current Weather Forecast</p>
-			<canvas id="skycons" width="128" height="128ge a"></canvas>
+			<canvas id="skycons" width="64" height="64"></canvas>
 		</div>
 	</div>	
 </div>
@@ -30,53 +30,69 @@
 <script type="text/html" id="forecast-template">
 	<div class="forecast-template">
 		<hr>
-		<dl class="dl-horizontal">
-			<dt>Location:</dt>
-			<dd>[LOCATION]</dd>
-			<dt>Summary:</dt>
-			<dd>[SUMMARY]</dd>
-			<dt>Temperature:</dt>
-			<dd>[TEMP]</dd>
-			<dt>Humidity:</dt>
-			<dd>[HUMIDITY] %</dd>
-			<dt>Cloud Cover:</dt>
-			<dd>[CLOUD]</dd>
-			<dt>Wind:</dt>
-			<dd>[WIND] mph</dd>
-			<dt>Time:</dt>
-			<dd>[TIME]</dd>
-			<dt>Latitude:</dt>
-			<dd>[LAT]</dd>
-			<dt>Longitude:</dt>
-			<dd>[LNG]</dd>
-		</dl>
+		<div class="info">
+			<ul>
+				<li class="info-tab" style="display: block">
+					<ul class="info-meta">
+						<!-- Currently weather -->
+						<li class="first">
+							<span class="daydatetime">Mon 08.1.14 <br>[TIME]</span>							
+							<div class="temperature">
+								<div class="fr">
+									<div class="gradus">
+										<span class="celsius">° C</span>
+										<span class="number">[TEMP]</span>
+									</div>
+								</div>
+							</div>
+							<div class="discription">[SUMMARY]</div>
+							<div class="windchill">[LOCATION]</div>
+							<div class="other">
+								<span class="humidity">
+									<img src="/assets/images/humidity.png" width="32" height="32" title="Humidity" class="icon">
+									<span class="point">[HUMIDITY]</span>%
+								</span>								
+								<span class="cloud">
+									<img src="/assets/images/cloudy.png" width="32" height="32" title="Cloud cover" class="icon">
+									<span class="point">[CLOUD]</span>%
+								</span>
+								<span class="wind">
+									<img src="/assets/images/windImgE.png" width="32" height="32" title="East" class="icon"> 
+									<span class="point">[WIND]</span>							
+								</span>
+								<span class="rainpos">
+									<img src="/assets/images/posrain.png" width="32" height="32" title="Rain possibility" class="icon">
+									<span class="point">[PRESSURE]</span>
+								</span>
+
+							</div>
+						</li>
+						<!-- End Currently weather -->
+					</ul>
+				</li>
+			</ul>			
+		</div>
 
 		<hr>
 		<div class="hourly-forecast">
 			<h5><i class="fa fa-compass"></i>&nbsp; Hourly</h5>
-			<div class="next-hour clearfix">
-				<p class="term pull-left">Next Hour: </p>
-				<p class="desc pull-left">[NEXT HOUR]</p>
-			</div>
-
-			<div class="hourly-summary clearfix">
-				<p class="term term-summary pull-left">Summary: </p>
-				<p class="desc desc-summary pull-left">&nbsp; [HOURLY]</p>
-			</div>
+			<dl class="dl-horizontal">
+				<dt>Next Hour:</dt>
+				<dd>[NEXT HOUR]</dd>			
+				<dt>Summary: </dt>
+				<dd>[HOURLY]</dd>
+			</dl>
 		</div>
 
 		<hr>
 		<div class="daily-forecast">
 			<h5><i class="fa fa-tachometer"></i>&nbsp; Daily</h5>
-			<div class="next-day clearfix">
-				<p class="term pull-left">Next 24 Hour: </p>
-				<p class="desc pull-left">[NEXT DAY]</p>
-			</div>
-
-			<div class="daily-summary clearfix">
-				<p class="term term-summary pull-left">Summary: </p>
-				<p class="desc desc-summary  pull-left">&nbsp; [DAILY]</p>
-			</div>
+			<dl class="dl-horizontal">
+				<dt>Next 24 Hours:</dt>
+				<dd>[NEXT DAY]</dd>
+				<dt>Summary: </dt>
+				<dd>[DAILY]</dd>
+			</dl>
 		</div>
 	</div>
 </script>
